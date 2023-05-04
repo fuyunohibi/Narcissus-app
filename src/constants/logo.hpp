@@ -1,8 +1,11 @@
+#ifndef LOGO_H
+#define LOGO_H
+
 #include <iostream>
 #include <string>
-#include "colors.cpp"
-#include "fontWeight.cpp"
-
+#include "colors.hpp"
+#include "fontWeight.hpp"
+using namespace std;
 
 string MesanLogo() {
     string logo =  " __    __     ______     ______     ______     __   __        ______   ______     ______     __  __  \n"
@@ -37,5 +40,7 @@ void MesanEndingLogoWithStyles() {
     string endingLogo = MesanEndingLogo();
     cout << setFontWeight(FontWeight::bold, setColor(Color::red, endingLogo)) << endl;
 }
+
+#endif // LOGO_H
 
 

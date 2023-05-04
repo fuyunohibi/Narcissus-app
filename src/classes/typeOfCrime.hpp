@@ -1,3 +1,6 @@
+#ifndef TYPE_OF_CRIME_H
+#define TYPE_OF_CRIME_H
+
 enum class TypeOfCrime
 {
     Theft,
@@ -13,4 +16,5 @@ enum class Gender
     Female,
     Other
 };
-;
+
+#endif // TYPE_OF_CRIME_H

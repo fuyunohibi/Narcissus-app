@@ -3,6 +3,7 @@
 
 #include <string>
 #include <sstream>
+using namespace std;
 
 // USAGE: setFontWeight(FontWeights::weight, string)
 
@@ -13,7 +14,6 @@ with reset representing the escape code to reset the font weight to default.
 The setFontWeight function takes a FontWeights value and a string, and returns the string
 with the appropriate escape code added for the specified font weight. */
 
-using namespace std;
 
 enum class FontWeight
 {

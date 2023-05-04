@@ -1,3 +1,6 @@
+#ifndef CLEAR_SCREEN_H
+#define CLEAR_SCREEN_H
+
 #include <iostream>
 #include <cstdlib> // for std::system
 
@@ -13,4 +16,4 @@ void clearScreen()
 #endif
 }
 
-
+#endif // CLEAR_SCREEN_H
