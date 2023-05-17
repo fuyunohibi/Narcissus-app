@@ -21,13 +21,11 @@ void ClassifiedOpsSystem::loginScreen()
         cout << "\n\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
 
         // prompt user for username and password
-        cout << "\n\t\tENTER USERNAME     : "
-             << "\t";
+        cout << "\n\t\tENTER USERNAME : ";
         string input_username;
         cin >> input_username;
 
-        cout << "\n\t\tENTER PASSWORD     :  "
-             << "\t";
+        cout << "\n\t\tENTER PASSWORD : ";
         string input_password;
         cin >> input_password;
 

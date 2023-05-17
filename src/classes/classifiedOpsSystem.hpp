@@ -14,8 +14,7 @@ class ClassifiedOpsSystem
 {
 private:
     string name;
-    Gender gen;
-    string face;
+    Gender gender;
     int age;
     float height;
     float weight;
@@ -23,7 +22,7 @@ private:
     string contact;
     TypeOfCrime crime_type;
     string status;
-    int punishment;
+    float punishment;
     string court;
     string victim;
     string vadd;

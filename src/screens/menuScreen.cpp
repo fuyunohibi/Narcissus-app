@@ -21,7 +21,7 @@ void ClassifiedOpsSystem::menuScreen()
     cout << "\n\t5. DELETE RECORD" << endl;
     cout << "\n\t6. EXIT" << endl;
     cout << "\n\n\t\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1";
-    cout << "\n\n\tEnter your choice: ";
+    cout << "\n\n\tEnter your choice  : ";
     int n;
     cin >> n;
     switch (n)

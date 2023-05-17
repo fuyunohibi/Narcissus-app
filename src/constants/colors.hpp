@@ -14,7 +14,6 @@ with reset representing the escape code to reset the terminal color to default.
 The colorize function takes a Colors value and a string, and returns the string
 with the appropriate escape code added for the specified color. */
 
-
 enum class Color {
     red = 31,
     green = 32,

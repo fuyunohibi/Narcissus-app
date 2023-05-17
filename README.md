@@ -1,3 +1,6 @@
+g++ -o App App.cpp
+./App
+
 <h1>Narcissus App</h1>
 
 
