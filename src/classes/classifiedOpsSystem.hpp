@@ -9,7 +9,6 @@
 using namespace std;
 
 // Purpose: Header file for myClass class.
-
 class ClassifiedOpsSystem
 {
 private:
@@ -20,16 +19,15 @@ private:
     float weight;
     string address;
     string contact;
+    string career;
+    string date;
     TypeOfCrime crime_type;
-    string status;
-    float punishment;
-    string court;
-    string victim;
-    string vadd;
-    string image;
-    map<string, string> caseHistory;
-    vector<string> tags;
+    int victim;
+    string term;
     bool in_jail;
+    int recordID;
+    int count = 0;
+    vector<string> all_data;
 
 public:
     string generateUniqueID();
