@@ -31,6 +31,8 @@ void ClassifiedOpsSystem::input()
     cout << "\n\t\t\tENTER CRIMINAL DETAILS" << endl;
     cout << "\n\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
 
+    all_data.clear();
+
     int caseID = generateUniqueId(count);
     recordID = caseID;
     all_data.push_back(to_string(recordID));
@@ -57,11 +59,11 @@ void ClassifiedOpsSystem::input()
             validGender = true;
             break;
         case 'F':
-            gender = Gender::Female;
+            gender = "Female";
             validGender = true;
             break;
         case 'O':
-            gender = Gender::Other;
+            gender = "Other";
             validGender = true;
             break;
         default:
@@ -70,6 +72,7 @@ void ClassifiedOpsSystem::input()
             break;
         }
     } while (!validGender);
+    all_data.push_back(gender);
 
     bool validAge = false;
     while (!validAge) {
@@ -82,6 +85,7 @@ void ClassifiedOpsSystem::input()
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discards input characters from the input stream until the specified delimiter
         }
     }
+    all_data.push_back(to_string(age));
 
     bool validHeight = false;
     while (!validHeight) {
@@ -93,7 +97,8 @@ void ClassifiedOpsSystem::input()
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
         }
-    } 
+    }
+    all_data.push_back(to_string(height));
 
     bool validWeight = false;
     while (!validWeight) {
@@ -106,22 +111,24 @@ void ClassifiedOpsSystem::input()
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
+    all_data.push_back(to_string(weight));
 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     cout << "\n\tEnter Address        : ";
-    cin.ignore();
     getline(cin, address);
+    all_data.push_back(address);
 
     cout << "\n\tEnter Contact        : ";
     getline(cin, contact);
+    all_data.push_back(contact);
 
     cout << "\n\tEnter Career         : ";
-    cin.ignore();
     getline(cin, career);
+    all_data.push_back(career);
 
-    string date;
     cout << "\n\tEnter Date (D/M/Y)   : ";
-    cin.ignore();
     getline(cin, date);
+    all_data.push_back(date);
 
     bool validCrime = false;
     while (!validCrime) {
@@ -133,30 +140,30 @@ void ClassifiedOpsSystem::input()
         cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\t4. Cybercrime")) << endl;
         cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\t5. Other")) << endl;
         cout << "\n\n\t\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1";
-        cout << "\n\n\tEnter your choice  : ";
+        cout << "\n\n\tEnter your choice    : ";
         int n;
         cin >> n;
 
         switch (n)
         {
         case 1:
-            crime_type = TypeOfCrime::Theft;
+            crime_type = "Theft";
             validCrime = true;
             break;
         case 2:
-            crime_type = TypeOfCrime::Assault;
+            crime_type = "Assault";
             validCrime = true;
             break;
         case 3:
-            crime_type = TypeOfCrime::Fraud;
+            crime_type = "Fraud";
             validCrime = true;
             break;
         case 4:
-            crime_type = TypeOfCrime::Cybercrime;
+            crime_type = "Cybercrime";
             validCrime = true;
             break;
         case 5:
-            crime_type = TypeOfCrime::Other;
+            crime_type = "Other";
             validCrime = true;
             break;
         default:
@@ -165,11 +172,12 @@ void ClassifiedOpsSystem::input()
             break;
         }
     }
+    all_data.push_back(crime_type);
 
     bool validVictim = false;
     while (!validVictim)
     {
-        cout << "\n\tEnter Age            : ";
+        cout << "\n\tEnter Victim Age     : ";
         if (cin >> victim && victim > 0 && victim <= 150)
         {
             validVictim = true;
@@ -181,44 +189,142 @@ void ClassifiedOpsSystem::input()
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // discards input characters from the input stream until the specified delimiter
         }
     }
+    all_data.push_back(to_string(victim));
 
-    cout << "\n\tEnter Term (Y, M, D) : ";
+    cout << "\n\tEnter Term           : ";
     cin.ignore();
     getline(cin, term);
+    all_data.push_back(term);
 
-    // bool valid_char = false;
-    // char jailChar;
-    // cout << "\n\tIs the Criminal in Jail (Y/N)? ";
-    // do
-    // {
-    //     cin >> jailChar;
-    //     jailChar = toupper(jailChar);
-    //     switch (jailChar)
-    //     {
-    //     case('Y') :
-    //         in_jail.push_back(true);
-    //         valid_char = true;
-    //         break;
-    //     case('N') :
-    //         in_jail.push_back(false);
-    //         valid_char = true;
-    //         break;
-    //     default:
-    //         cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tInvalid input. Please enter Y/N ")) << endl;
-    //         cin.clear();
-    //         break;
-    //     }
-    // } while (!valid_char);
+    criminals_data.push_back(all_data);
 }
 
-void ClassifiedOpsSystem::output()
-{
-    
+void ClassifiedOpsSystem::output(){
+    for(const auto& d: criminals_data){
+        for(const auto& i: d){
+            cout << i << " ";
+        }
+        cout << endl;
+    }
+    menuScreen();
 }
-// void searchRecord();
+
+void ClassifiedOpsSystem::searchRecord(){
+    cout << "\n\t___________________________________________________________" << endl;
+    cout << " \n \t\t             Search Record                  " << endl;
+    cout << "\t___________________________________________________________\n\n"
+         << endl;
+    cout << "\t1. RECORD ID" << endl;
+    cout << "\n\t2. NAME" << endl;
+    cout << "\n\t3. GO BACK" << endl;
+    cout << "\n\n\t\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1";
+    cout << "\n\n\tEnter your choice   : ";
+    int n;
+    cin >> n;
+    string ip;
+    switch (n)
+    {
+    case 1:
+        cout << "\n\n\tEnter criminal's record ID  : ";
+        cin >> ip;
+        for(int i = 0; i < criminals_data.size(); i++){
+            if(criminals_data[i][0] == ip){
+                cout << "\n\tName          : " << criminals_data[i][1] << endl;
+                cout << "\n\tRecord ID     : " << criminals_data[i][0] << endl;
+                cout << "\n\tGender        : " << criminals_data[i][2] << endl;
+                cout << "\n\tAge           : " << criminals_data[i][3] << " years" << endl;
+                cout << "\n\tHeight        : " << criminals_data[i][4] << " cm" << endl;
+                cout << "\n\tWeight        : " << criminals_data[i][5] << " kg" << endl;
+                cout << "\n\tAddress       : " << criminals_data[i][6] << endl;
+                cout << "\n\tContact       : " << criminals_data[i][7] << endl;
+                cout << "\n\tCareer        : " << criminals_data[i][8] << endl;
+                cout << "\n\tDate          : " << criminals_data[i][9] << endl;
+                cout << "\n\tCriminal Type : " << criminals_data[i][10] << endl;
+                cout << "\n\tVictim Age    : " << criminals_data[i][11] << " years" << endl;
+                cout << "\n\tTerm          : " << criminals_data[i][12] << endl;
+                cout << endl;
+            }
+        }
+        menuScreen();
+    case 2:
+        cout << "\n\n\tEnter criminal's name       : ";
+        cin >> ip;
+        for (int i = 0; i < criminals_data.size(); i++){
+            if (criminals_data[i][1] == ip){
+                cout << "\n\tName          : " << criminals_data[i][1] << endl;
+                cout << "\n\tRecord ID     : " << criminals_data[i][0] << endl;
+                cout << "\n\tGender        : " << criminals_data[i][2] << endl;
+                cout << "\n\tAge           : " << criminals_data[i][3] << " years" << endl;
+                cout << "\n\tHeight        : " << criminals_data[i][4] << " cm" << endl;
+                cout << "\n\tWeight        : " << criminals_data[i][5] << " kg" << endl;
+                cout << "\n\tAddress       : " << criminals_data[i][6] << endl;
+                cout << "\n\tContact       : " << criminals_data[i][7] << endl;
+                cout << "\n\tCareer        : " << criminals_data[i][8] << endl;
+                cout << "\n\tDate          : " << criminals_data[i][9] << endl;
+                cout << "\n\tCriminal Type : " << criminals_data[i][10] << endl;
+                cout << "\n\tVictim Age    : " << criminals_data[i][11] << " years" << endl;
+                cout << "\n\tTerm          : " << criminals_data[i][12] << endl;
+                cout << endl;
+            }
+        }
+        menuScreen();
+    case 3:
+        menuScreen();
+    default:
+        cout << "\n\n            ENTER WRONG CHOICE PRESS AGAIN     \n"
+             << endl;
+        searchRecord();
+        break;
+    }
+}
 // void editRecord();
 // void viewRecord();
-// void deleteRecord();
+void ClassifiedOpsSystem::deleteRecord(){
+    cout << "\n\t___________________________________________________________" << endl;
+    cout << " \n \t\t             Delete Record                  " << endl;
+    cout << "\t___________________________________________________________\n\n"
+         << endl;
+    cout << "\t1. RECORD ID" << endl;
+    cout << "\n\t2. NAME" << endl;
+    cout << "\n\t3. GO BACK" << endl;
+    cout << "\n\n\t\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1";
+    cout << "\n\n\tEnter your choice   : ";
+    int n;
+    cin >> n;
+    string ip;
+    switch (n)
+    {
+    case 1:
+        cout << "\n\n\tEnter criminal's record ID  : ";
+        cin >> ip;
+        for (int i = 0; i < criminals_data.size(); i++)
+        {
+            if (criminals_data[i][0] == ip)
+            {
+                criminals_data.erase(criminals_data.begin() + i);
+            }
+        }
+        menuScreen();
+    case 2:
+        cout << "\n\n\tEnter criminal's name       : ";
+        cin >> ip;
+        for (int i = 0; i < criminals_data.size(); i++)
+        {
+            if (criminals_data[i][1] == ip)
+            {
+                criminals_data.erase(criminals_data.begin() + i);
+            }
+        }
+        menuScreen();
+    case 3:
+        menuScreen();
+    default:
+        cout << "\n\n            ENTER WRONG CHOICE PRESS AGAIN     \n"
+             << endl;
+        deleteRecord();
+        break;
+    }
+}
 // void generateReport();
 // void storeMedia();
 // void courtProgress();

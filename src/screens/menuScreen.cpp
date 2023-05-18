@@ -29,13 +29,13 @@ void ClassifiedOpsSystem::menuScreen()
     case 1:
         addRecord();
     case 2:
-        break;
+        searchRecord();
     case 3:
         break;
     case 4:
-        break;
+        output();
     case 5:
-        break;
+        deleteRecord();
     case 6:
         MesanEndingLogoWithStyles();
         exit(0);

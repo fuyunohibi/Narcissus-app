@@ -1,17 +1,10 @@
 #ifndef DATA_H
 #define DATA_H
-
 #include <vector>
-
 using namespace std;
 
-
-template <class T>
-vector<T> criminals_data;
-
-template <class T>
-const static vector<T> data(vector<T> d) {
-    criminals_data.push_back(d);
+vector<vector<string>> get_data(vector<vector<string>> data){
+    return data;
 }
 
-#endif //DATA_H
+#endif // DATA_H

@@ -9,15 +9,9 @@ using namespace std;
 int main()
 {
     MesanLogoWithStyles();
-    vector<ClassifiedOpsSystem> criminals;
-    bool t = true;
-    while (t){
-        
-    }
-    ClassifiedOpsSystem c1;
-    criminals.push_back(c1);
-    c1.loginScreen();
-    c1.menuScreen();
+    ClassifiedOpsSystem criminals;
+    criminals.loginScreen();
+    criminals.menuScreen();
 
     return 0;
 }

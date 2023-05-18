@@ -13,23 +13,25 @@ class ClassifiedOpsSystem
 {
 private:
     string name;
-    Gender gender;
+    string gender;
     int age;
-    float height;
-    float weight;
+    int height;
+    int weight;
     string address;
     string contact;
     string career;
     string date;
-    TypeOfCrime crime_type;
+    string crime_type;
     int victim;
     string term;
     bool in_jail;
     int recordID;
     int count = 0;
     vector<string> all_data;
+    vector<vector<string>> criminals_data;
 
 public:
+    void create_data();
     string generateUniqueID();
 
     // screens folder
