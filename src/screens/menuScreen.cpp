@@ -24,25 +24,31 @@ void ClassifiedOpsSystem::menuScreen()
     cout << "\n\n\tEnter your choice  : ";
     int n;
     cin >> n;
-    switch (n)
-    {
-    case 1:
-        addRecord();
-    case 2:
-        searchRecord();
-    case 3:
-        break;
-    case 4:
-        output();
-    case 5:
-        deleteRecord();
-    case 6:
-        MesanEndingLogoWithStyles();
-        exit(0);
-    default:
-        cout << "\n\n            ENTER WRONG CHOICE PRESS AGAIN     \n"
-             << endl;
+    if(criminals_data.size() == 0 && n != 1 && n != 6){
+        cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\tThere is currently no criminal information in the recorder. Please add record first.")) << endl;
         menuScreen();
-        break;
+    }
+    else{
+        switch (n)
+        {
+        case 1:
+            addRecord();
+        case 2:
+            searchRecord();
+        case 3:
+            editRecord();
+        case 4:
+            viewRecord();
+        case 5:
+            deleteRecord();
+        case 6:
+            MesanEndingLogoWithStyles();
+            exit(0);
+        default:
+            cout << "\n\n            ENTER WRONG CHOICE PRESS AGAIN     \n"
+                 << endl;
+            menuScreen();
+            break;
+        }
     }
 }

@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "typeOfCrime.hpp"
 
 using namespace std;
 
@@ -13,22 +12,23 @@ class ClassifiedOpsSystem
 {
 private:
     string name;
+    string nation;
     string gender;
     int age;
     int height;
     int weight;
-    string address;
-    string contact;
     string career;
+    string institution;
     string date;
     string crime_type;
     int victim;
     string term;
-    bool in_jail;
     int recordID;
     int count = 0;
     vector<string> all_data;
     vector<vector<string>> criminals_data;
+    vector<string> data_type{"Record ID", "Name", "Nationality", "Gender", "Age", "Height", "Weight", "Career","Institution", "Date", "Criminal Type", "Victim Age", "Term"};
+    int criminalIndex;
 
 public:
     void create_data();
@@ -41,24 +41,32 @@ public:
     // components folder
     void addRecord();
     void input();
-
-
-
-    // TODO
+    void inputName();
+    void inputNationality();
+    void inputGender();
+    void inputAge();
+    void inputHeight();
+    void inputWeight();
+    void inputCrime();
+    void inputVictim();
     void output();
+    void search(int index);
     void searchRecord();
     void editRecord();
+    void edit(int i);
     void viewRecord();
+    void notfoundRecord();
     void deleteRecord();
+    void generate();
     void generateReport();
-    void storeMedia();
-    void courtProgress();
-    void notifications();
-    void userManagement();
-    void classifyRecords();
-    void linkRecords();
-    void anonymize();
-    void exportRecord();
+    // void storeMedia();
+    // void courtProgress();
+    // void notifications();
+    // void userManagement();
+    // void classifyRecords();
+    // void linkRecords();
+    // void anonymize();
+    // void exportRecord();
 };
 
 #endif // CLASSIFIED_OPS_SYSTEM_H
