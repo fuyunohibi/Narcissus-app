@@ -1,7 +1,7 @@
 # Narcissus App <small>- React ver.</small>
 ###### <span style="color: blue ;">made by Mesan Tech</span><hr>
 
-###Don't forget
+<h3>Don't forget</h3>
 to run this app you need to cd in to the build folder and run the following command:
 
 <blockquote><b>cd "/path/to/Narcissus-app/build" && ./NarcissusApp<b></blockquote>
