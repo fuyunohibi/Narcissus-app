@@ -1,21 +1,18 @@
-g++ -o App App.cpp
-./App
+# Narcissus App <small>- React ver.</small>
+###### <span style="color: blue ;">made by Mesan Tech</span><hr>
 
-<h1>Narcissus App</h1>
+###Don't forget
+to run this app you need to cd in to the build folder and run the following command:
 
+<blockquote><b>cd "/path/to/Narcissus-app/build" && ./NarcissusApp<b></blockquote>
 
-<h5><u>IMPORTANT!</u></h5>
-<p>
-  Before starting any work on your local repository, run <b>git pull</b> to ensure that you are working with the latest version of the codebase.
-</p>
-
+<br>
 
 <h4>Login Page</h4>
 <ul>
   <li><b>username:</b> mesan</li>
   <li><b>password:</b> 1234</li>
 </ul>
-
 
 <h4>Text Styles</h4>
 <p>Available methods:</p>

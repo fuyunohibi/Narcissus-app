@@ -1,0 +1,3 @@
+/Users/capt/Desktop/developments/Mesan-Project/Narcissus-app/build/CMakeFiles/NarcissusApp.dir
+/Users/capt/Desktop/developments/Mesan-Project/Narcissus-app/build/CMakeFiles/edit_cache.dir
+/Users/capt/Desktop/developments/Mesan-Project/Narcissus-app/build/CMakeFiles/rebuild_cache.dir

@@ -25,7 +25,7 @@ void ClassifiedOpsSystem::menuScreen()
     int n;
     cin >> n;
     if(criminals_data.size() == 0 && n != 1 && n != 6){
-        cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\tThere is currently no criminal information in the recorder. Please add record first.")) << endl;
+        cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\tCurrently there are no criminal information in the recorder. Please add record first.")) << endl;
         menuScreen();
     }
     else{

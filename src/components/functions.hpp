@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <vector>
 #include <regex>
+#include <cstdlib>
 #include "../constants/colors.hpp"
 #include "../constants/fontWeight.hpp"
 #include "../helpers/ClearScreen.hpp"
@@ -307,52 +308,7 @@ void ClassifiedOpsSystem::input()
     criminals_data.push_back(all_data);
 }
 
-void ClassifiedOpsSystem::output(){
-    for(const auto& d: criminals_data){
-        for(const auto& i: d){
-            cout << i << " ";
-        }
-        cout << endl;
-    }
-    menuScreen();
-}
 
-void ClassifiedOpsSystem::search(int index){
-    string ip;
-    bool found = false;
-    int width = 16;
-    do
-    {
-        cout << "\n\n\tEnter criminal's record ID : ";
-        cin >> ip;
-        cout << endl;
-        for (int i = 0; i < criminals_data.size(); i++)
-        {
-            if (criminals_data[i][index] == ip)
-            {
-                cout << setFontWeight(FontWeight::bold, setColor(Color::green, "\n\t\tFound information")) << endl;
-                for (int j = 0; j < data_type.size(); j++)
-                {
-                    cout << "\n\t" << setw(width) << left << data_type[j] << ": " << criminals_data[i][j] << endl;
-                }
-                criminalIndex = i;
-                found = true;
-                break;
-            }
-        }
-        if (!found)
-        {
-            cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tNo information found")) << endl;
-            cin.clear();
-            notfoundRecord();
-        }
-        else
-        {
-            generate();
-        }
-    } while (!found);
-    menuScreen();
-}
 
 void ClassifiedOpsSystem::searchRecord(){
     cout << "\n\t___________________________________________________________" << endl;
@@ -360,8 +316,7 @@ void ClassifiedOpsSystem::searchRecord(){
     cout << "\t___________________________________________________________\n\n"
          << endl;
     cout << "\t1. RECORD ID" << endl;
-    cout << "\n\t2. NAME" << endl;
-    cout << "\n\t3. GO BACK" << endl;
+    cout << "\n\t2. GO BACK" << endl;
     cout << "\n\n\t\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1";
     cout << "\n\n\tEnter your choice   : ";
     int n;
@@ -373,10 +328,8 @@ void ClassifiedOpsSystem::searchRecord(){
     switch (n)
     {
     case 1:
-        search(0);
+        search();
     case 2:
-        search(1);
-    case 3:
         menuScreen();
     default:
         cout << "\n\n            ENTER WRONG CHOICE PRESS AGAIN     \n"
@@ -596,7 +549,7 @@ void ClassifiedOpsSystem::viewRecord(){
                         {
                             cout << "\n\t" << setw(16) << left << data_type[j] << ": " << criminals_data[stoi(n) - 1][j] << endl;
                         }
-                        criminalIndex = intValue;
+                        specificCriminalIndex = intValue;
                         generate();
                         found = true;
                     }
@@ -713,41 +666,19 @@ void ClassifiedOpsSystem::deleteRecord()
     }
 }
 
-void ClassifiedOpsSystem::generate(){
-    bool validAns = false;
-    char ans;
-    while (!validAns)
+void ClassifiedOpsSystem::output()
+{
+    for (const auto &d : criminals_data)
     {
-        cout << "\n\tDo you want to display this information on the web? (Y/N) : ";
-        cin >> ans;
-        ans = toupper(ans);
-        switch (ans)
+        for (const auto &i : d)
         {
-        case 'Y':
-            validAns = true;
-            generateReport();
-            break;
-        case 'N':
-            validAns = true;
-            break;
-        default:
-            cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tInvalid input. Please enter Y or N.")) << endl;
-            cin.clear();
-            break;
+            cout << i << " ";
         }
+        cout << endl;
     }
+    menuScreen();
 }
 
-void ClassifiedOpsSystem::generateReport(){
-    // Capt part
-    for(int i = 0; i < data_type.size(); i++){
-        react_data.push_back(criminals_data[criminalIndex][i]);
-    }
-    // for(const auto& i: react_data){
-    //     cout << i << " ";
-    // }
-    cout << setFontWeight(FontWeight::bold, setColor(Color::green, "\n\t\tGenerated")) << endl;
-}
 // void storeMedia();
 // void courtProgress();
 // void notifications();
@@ -758,3 +689,4 @@ void ClassifiedOpsSystem::generateReport(){
 // void exportRecord();
 
 #endif // FUNCTIONS_H
+
