@@ -11,7 +11,10 @@ using namespace std;
 void ClassifiedOpsSystem::menuScreen()
 {
     cout << "\n\t___________________________________________________________" << endl;
-    cout << " \n \t\t             MANAGEMENT SYSTEM                  " << endl;
+    cout << setFontWeight(FontWeight::bold, 
+            setColor(Color::cyan, 
+            " \n \t\t\t             MANAGEMENT SYSTEM                  ")) 
+        << endl;
     cout << "\t___________________________________________________________\n\n"
          << endl;
     cout << "\t1. ADD RECORD" << endl;

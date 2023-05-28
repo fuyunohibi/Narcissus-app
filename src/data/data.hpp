@@ -17,7 +17,6 @@ using namespace rapidjson;
 vector<string> react_data; // Declare the vector as "extern" to indicate it's defined elsewhere
 
 // (MESAN MEMBER - CAPTAIN) Part
-
 #include <curl/curl.h>
 
 // Callback function to capture the response from the server
@@ -43,7 +42,7 @@ void ClassifiedOpsSystem::sendDataToReact(const string &jsonStr)
       curl_easy_setopt(curl, CURLOPT_POSTFIELDS, jsonStr.c_str());
 
       // Set up a buffer to capture the response
-      std::string responseBuffer;
+      string responseBuffer;
       curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeCallback);
       curl_easy_setopt(curl, CURLOPT_WRITEDATA, &responseBuffer);
 
@@ -71,23 +70,31 @@ void ClassifiedOpsSystem::sendDataToReact(const string &jsonStr)
    }
    else
    {
-      std::cout << "Failed to initialize libcurl" << std::endl;
+      cout << "Failed to initialize libcurl" << std::endl;
    }
 }
 
-void ClassifiedOpsSystem::search()
+void ClassifiedOpsSystem::search(int n)
 {
-   string id;
+   string ip;
    bool found = false;
    int width = 16;
+   int specificCriminalIndex;
+   string question;
+   if(n == 1){
+      question = "\n\n\tEnter criminal's record ID : ";
+   }
+   else{
+      question = "\n\n\tEnter criminal's name : ";
+   }
    do
    {
-      cout << "\n\n\tEnter criminal's record ID : ";
-      cin >> id;
-      cout << endl;
+      cout << question;
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      getline(cin, ip);
       for (int i = 0; i < criminals_data.size(); i++)
       {
-         if (criminals_data[i][0] == id)
+         if (criminals_data[i][n - 1] == ip)
          {
             cout << setFontWeight(FontWeight::bold, setColor(Color::green, "\n\t\tFound information")) << endl;
             for (int j = 0; j < data_type.size(); j++)
@@ -107,13 +114,13 @@ void ClassifiedOpsSystem::search()
       }
       else
       {
-         generate();
+         generate(specificCriminalIndex);
       }
    } while (!found);
    menuScreen();
 }
 
-void ClassifiedOpsSystem::generate()
+void ClassifiedOpsSystem::generate(int &specificCriminalIndex)
 {
    bool validAns = false;
    char ans;
@@ -139,7 +146,7 @@ void ClassifiedOpsSystem::generate()
          validAns = true;
          break;
       default:
-         cout << "\n\t\tInvalid input. Please enter Y or N." << endl;
+         cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tInvalid input. Please enter Y or N.")) << endl;
          cin.clear();
          cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
          break;
@@ -149,7 +156,13 @@ void ClassifiedOpsSystem::generate()
 
 void ClassifiedOpsSystem::makeMapData()
 {
+   // clear react data to start the fresh react data
+   react_data.clear();
+
    map<string, string> record;
+
+   // Clear map data
+   record.clear();
 
    // Adding fields to the record
    record["recordID"] = react_data[0];
@@ -180,6 +193,11 @@ void ClassifiedOpsSystem::makeMapData()
    Writer<StringBuffer> writer(buffer);
    json_data.Accept(writer);
    json_str = buffer.GetString();
+
+   for (auto it = record.cbegin(); it != record.cend(); ++it)
+   {
+      cout << it->first << " " << it->second << "\n";
+   }
 }
 
 #endif // DATA_H

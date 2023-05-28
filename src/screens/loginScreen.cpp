@@ -17,7 +17,7 @@ void ClassifiedOpsSystem::loginScreen()
     while (attempts < MAX_attempts)
     {
         cout << "\n\n\n\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
-        cout << "\n\t\t\t" << setFontWeight(FontWeight::bold, "Welcome Back") << "\t\t" << endl;
+        cout << "\n\t\t\t\t\t" << setFontWeight(FontWeight::bold, "Welcome Back") << "\t\t" << endl;
         cout << "\n\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
 
         // prompt user for username and password
@@ -34,7 +34,7 @@ void ClassifiedOpsSystem::loginScreen()
         if (input_username == username && input_password == password)
         {
             cout << "\n\n\n\n\n\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
-            cout << "\n\t\t\t      "
+            cout << "\n\t\t\t\t\t      "
                  << setFontWeight(FontWeight::bold, setColor(Color::green, "Login Succesful")) << endl;
             cout << "\n\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~\n\n"
                  << endl;

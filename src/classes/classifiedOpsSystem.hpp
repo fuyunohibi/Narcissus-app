@@ -24,12 +24,14 @@ private:
     int victim;
     string term;
     int recordID;
-    int count = 0;
     vector<string> all_data;
-    vector<vector<string> > criminals_data={{"65011000", "John Doe", "Thai", "Male", "64", "50", "64", "officer", "BCC", "19/12/1987", "Theft", "19", "LIFE"}};
+    vector<vector<string>> criminals_data = {
+        {"65011000", "John Doe", "Thai", "Male", "64", "165", "64", "officer", "BCC", "19/12/1987", "Theft", "19", "LIFE"},
+        {"65011001", "Kim Sum", "Korean", "Female", "24", "155", "49", "Software Engineer", "Somebody", "25/12/1987", "Cybercrime", "30", "LIFE"},
+        {"65011002", "Jung Petch", "Korean", "Male", "24", "190", "70", "Super Star", "Mesan", "31/12/2004", "Cybercrime with Kim Sum", "30", "LIFE"},
+        {"65011003", "Lee Wan", "Korean", "Male", "19", "186", "170", "Super Man", "Mesan", "31/12/2004", "Stole the kid's candy", "7", "1 Day"}};
     vector<string> data_type={"Record ID", "Name", "Nationality", "Gender", "Age", "Height", "Weight", "Career", "Institution", "Date", "Criminal Type", "Victim Age", "Term"};
-    int specificCriminalIndex;
-
+    int count = criminals_data.size();
     // Declare json_str as a member variable
     string json_str; 
 
@@ -53,27 +55,19 @@ public:
     void inputCrime();
     void inputVictim();
     void output();
-    void search();
+    void search(int n);
     void searchRecord();
     void editRecord();
     void edit(int i);
     void viewRecord();
     void notfoundRecord();
     void deleteRecord();
-    // void storeMedia();
-    // void courtProgress();
-    // void notifications();
-    // void userManagement();
-    // void classifyRecords();
-    // void linkRecords();
-    // void anonymize();
-    // void exportRecord();
 
     // mapping the vector for making mapped data to parse into json format => send to react
     void makeMapData();
 
     // sending data to react
-    void generate();
+    void generate(int &specificCriminalIndex);
     void sendDataToReact(const string &jsonStr);
 };
 

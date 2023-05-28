@@ -37,7 +37,7 @@ bool validateString(const string &inputString)
 void ClassifiedOpsSystem::addRecord()
 {
     cout << "\n\t___________________________________________________________" << endl;
-    cout << " \n\t\t\t ADD NEW RECORD" << endl;
+    cout << " \n\t\t\t\t\t\t ADD NEW RECORD" << endl;
     cout << "\t___________________________________________________________\n\n"
          << endl;
 
@@ -180,51 +180,60 @@ void ClassifiedOpsSystem::inputCrime(){
         cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\t4. Cybercrime")) << endl;
         cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\t5. Other")) << endl;
         cout << "\n\n\t\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1";
+
         cout << "\n\n\tEnter your choice    : ";
+        
         int n;
-        cin >> n;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         string other;
         bool validOther = false;
-        switch (n)
+        if(!(cin >> n))
         {
-        case 1:
-            crime_type = "Theft";
-            validCrime = true;
-            break;
-        case 2:
-            crime_type = "Assault";
-            validCrime = true;
-            break;
-        case 3:
-            crime_type = "Fraud";
-            validCrime = true;
-            break;
-        case 4:
-            crime_type = "Cybercrime";
-            validCrime = true;
-            break;
-        case 5:
-            while(!validOther){
-                cout << "\n\tEnter the type of crime : ";
-                getline(cin, other);
-                if (validateString(other))
-                {
-                    crime_type = other;
-                    validOther = true;
-                }
-                else
-                {
-                    cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tInvalid input. Please enter only letters without numbers.")) << endl;
-                    cin.clear();
-                }
-            }
-            validCrime = true;
-            break;
-        default:
-            cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tInvalid input. Please enter a number between 1 and 5.")) << endl;
+            validCrime = false;
+            cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tInvalid input. Please enter the valid crime number only.")) << endl;
             cin.clear();
-            break;
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        } else {
+            switch (n)
+            {
+            case 1:
+                crime_type = "Theft";
+                validCrime = true;
+                break;
+            case 2:
+                crime_type = "Assault";
+                validCrime = true;
+                break;
+            case 3:
+                crime_type = "Fraud";
+                validCrime = true;
+                break;
+            case 4:
+                crime_type = "Cybercrime";
+                validCrime = true;
+                break;
+            case 5:
+                while (!validOther)
+                {
+                    cout << "\n\tEnter the type of crime : ";
+                    getline(cin, other);
+                    if (validateString(other))
+                    {
+                        crime_type = other;
+                        validOther = true;
+                    }
+                    else
+                    {
+                        cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tInvalid input. Please enter only letters without numbers.")) << endl;
+                        cin.clear();
+                    }
+                }
+                validCrime = true;
+                break;
+            default:
+                cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tInvalid input. Please enter a number between 1 and 5.")) << endl;
+                cin.clear();
+                break;
+            }
         }
     }
 }
@@ -251,7 +260,7 @@ void ClassifiedOpsSystem::inputVictim(){
 void ClassifiedOpsSystem::input()
 {
     cout << "\n\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
-    cout << "\n\t\t\tENTER CRIMINAL DETAILS" << endl;
+    cout << "\n\t\t\t\t\t ENTER CRIMINAL DETAILS" << endl;
     cout << "\n\t~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~" << endl;
 
     all_data.clear();
@@ -316,7 +325,8 @@ void ClassifiedOpsSystem::searchRecord(){
     cout << "\t___________________________________________________________\n\n"
          << endl;
     cout << "\t1. RECORD ID" << endl;
-    cout << "\n\t2. GO BACK" << endl;
+    cout << "\n\t2. NAME" << endl;
+    cout << "\n\t3. GO BACK" << endl;
     cout << "\n\n\t\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1";
     cout << "\n\n\tEnter your choice   : ";
     int n;
@@ -328,8 +338,10 @@ void ClassifiedOpsSystem::searchRecord(){
     switch (n)
     {
     case 1:
-        search();
+        search(n);
     case 2:
+        search(n);
+    case 3:
         menuScreen();
     default:
         cout << "\n\n            ENTER WRONG CHOICE PRESS AGAIN     \n"
@@ -347,19 +359,34 @@ void ClassifiedOpsSystem::edit(int i){
         {
             cout << "\n\t" << setw(18) << left << to_string(j + 1) + ". " + data_type[j] << ": " << criminals_data[i][j] << endl;
         }
-        int choice;
+        string choiceStr;
         bool invalidChoice = false;
+        bool invalidID = false;
         do
         {
             cout << "\n\tEnter your choice of data type you want to edit : ";
-            cin >> choice;
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-            switch (choice){
+            cin >> choiceStr;
+            try
+            {
+                int choice = stoi(choiceStr);
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                invalidChoice = false;
+                switch (choice)
+                {
                 case 1:
-                    cout << "\n\tEnter Record ID      : ";
-                    cin >> recordID;
-                    criminals_data[i][choice - 1] = to_string(recordID);
+                    do{
+                        cout << "\n\tEnter Record ID      : ";
+                        if (!(cin >> recordID))
+                        {
+                            invalidID = true;
+                            cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tInvalid input. Please enter the valid ID number only.")) << endl;
+                            cin.clear();
+                            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        } else {
+                            criminals_data[i][choice - 1] = to_string(recordID);
+                            invalidID = false;
+                        }
+                    } while(invalidID);
                     break;
                 case 2:
                     inputName();
@@ -418,6 +445,11 @@ void ClassifiedOpsSystem::edit(int i){
                     cin.clear();
                     invalidChoice = true;
                     break;
+                }
+            } catch (const std::exception &e) {
+                    cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tInvalid input. Please enter only number (1 - 13).")) << endl;
+                    cin.clear();
+                    invalidChoice = true;
             }
 
         } while(invalidChoice);
@@ -464,11 +496,11 @@ void ClassifiedOpsSystem::editRecord()
         {
             cout << "\n\n\tEnter criminal's record ID : ";
             cin >> ip;
-            cout << setFontWeight(FontWeight::bold, setColor(Color::green, "\n\t\tFound information")) << endl;
             for (int i = 0; i < criminals_data.size(); i++)
             {
                     if (criminals_data[i][0] == ip)
                     {
+                        cout << setFontWeight(FontWeight::bold, setColor(Color::green, "\n\t\tFound information")) << endl;
                         edit(i);
                         found = true;
                         break;
@@ -476,9 +508,9 @@ void ClassifiedOpsSystem::editRecord()
             }
             if (!found)
             {
-                    cout << setFontWeight(FontWeight::bold, setColor(Color::green, "\n\t\tNo information found")) << endl;
-                    cin.clear();
-                    notfoundRecord();
+                cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tNo information found")) << endl;
+                cin.clear();
+                notfoundRecord();
             }
         } while (!found);
         menuScreen();
@@ -486,12 +518,12 @@ void ClassifiedOpsSystem::editRecord()
         do
         {
             cout << "\n\n\tEnter criminal's name : ";
-            cin >> ip;
-            cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tFound information")) << endl;
+            getline(cin, ip);
             for (int i = 0; i < criminals_data.size(); i++)
             {
                     if (criminals_data[i][1] == ip)
                     {
+                        cout << setFontWeight(FontWeight::bold, setColor(Color::red, "\n\t\tFound information")) << endl;
                         edit(i);
                         found = true;
                         break;
@@ -529,6 +561,7 @@ void ClassifiedOpsSystem::viewRecord(){
     cout << "\n\n\t\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1\xB1";
     bool found = false;
     string n;
+    int specificCriminalIndex;
     do
     {
         cout << "\n\n\tEnter number of criminal you want to view : ";
@@ -549,8 +582,8 @@ void ClassifiedOpsSystem::viewRecord(){
                         {
                             cout << "\n\t" << setw(16) << left << data_type[j] << ": " << criminals_data[stoi(n) - 1][j] << endl;
                         }
-                        specificCriminalIndex = intValue;
-                        generate();
+                        specificCriminalIndex = intValue - 1;
+                        generate(specificCriminalIndex);
                         found = true;
                     }
                     else
@@ -637,7 +670,7 @@ void ClassifiedOpsSystem::deleteRecord()
         do
         {
             cout << "\n\n\tEnter criminal's name : ";
-            cin >> ip;
+            getline(cin, ip);
             for (int i = 0; i < criminals_data.size(); i++)
             {
                 if (criminals_data[i][1] == ip)
@@ -666,27 +699,18 @@ void ClassifiedOpsSystem::deleteRecord()
     }
 }
 
-void ClassifiedOpsSystem::output()
-{
-    for (const auto &d : criminals_data)
-    {
-        for (const auto &i : d)
-        {
-            cout << i << " ";
-        }
-        cout << endl;
-    }
-    menuScreen();
-}
-
-// void storeMedia();
-// void courtProgress();
-// void notifications();
-// void userManagement();
-// void classifyRecords();
-// void linkRecords();
-// void anonymize();
-// void exportRecord();
+// void ClassifiedOpsSystem::output()
+// {
+//     for (const auto &d : criminals_data)
+//     {
+//         for (const auto &i : d)
+//         {
+//             cout << i << " ";
+//         }
+//         cout << endl;
+//     }
+//     menuScreen();
+// }
 
 #endif // FUNCTIONS_H
 
